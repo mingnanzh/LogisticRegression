@@ -73,7 +73,7 @@ for i in range(len(vote_result)):
 data_label_prediction = (vote_result.argmax(axis=1)+1).reshape(len(vote_result),1)
 
 prediction = pd.DataFrame(data_label_prediction)
-prediction.to_csv('dataset/prediction.csv')
+prediction.to_csv('result/prediction.csv')
 
 # calculate performance: accuracy, precision, recall, and F1 score
 ACC = np.sum(data_label_prediction == data_label) / len(data_label)
