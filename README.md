@@ -6,20 +6,6 @@
 
 ### Performance on different parameter settings:
 - `alpha=0.1, maxiteration=300`:
-<table border="1" align="center">
-  <tr>
-    <th>Month</th>
-    <th>Savings</th>
-  </tr>
-  <tr>
-    <td>January</td>
-    <td align="center">$100</td>
-  </tr>
-  <tr>
-    <td>February</td>
-    <td>$80</td>
-  </tr>
-</table>
 
 Performance Metric | Value (%)
 :-: | :-:
