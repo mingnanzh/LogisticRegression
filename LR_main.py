@@ -33,22 +33,23 @@ def logistic_regression(feature, label, alpha, max_iterations, classifier):
             A[j][0] = logistic_f(A[j][0])                                 # compute h(x)=1/(1+exp^{-w^{T}x})
         E = A-label                                                       # compute E=h(x)-y
         weights = weights - alpha * np.dot(feature.T,E) / m               # update w=w-alpha*x^{T}*E
-        error1 = np.sum(-A * label + (1 - label) * np.log(1 + np.exp(A)))
-        error2 = np.sum(np.abs(E))
-        print("Classifier[%d] iteration %d: error1 %f, error2 %f, percentage %.2f%%" % (classifier, i, error1, error2, 100*error2/m))
+        error = np.sum(np.abs(E))
+        print("Classifier[%d] iteration %d: error %f, percentage %.2f%%" % (classifier, i, error, 100*error/m))
     return weights
 
 
+num_of_features=17
+num_of_classes=26
 # training:
 # read data
 data_feature , data_label = init_data("train_set.csv")
 data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axis=1)
 
 # initialize w
-w = np.zeros(17*26).reshape(26,17)
+w = np.zeros(num_of_features*num_of_classes).reshape(num_of_classes,num_of_features)
 
 # create 26 classifiers
-for i in range(26):
+for i in range(num_of_classes):
     data_label_modified = []
     for j in range(len(data_label)):
             if data_label[j] == i+1:
@@ -56,9 +57,8 @@ for i in range(26):
             else:
                 data_label_modified.append(0)
     data_label_modified = np.array(data_label_modified).reshape(len(data_label_modified), 1)
-    w[i] = logistic_regression(data_feature, data_label_modified, 0.03, 3000, i).reshape(1, 17)
+    w[i] = logistic_regression(data_feature, data_label_modified, 0.085, 1000, i).reshape(1, num_of_features)
     print(w[i])
-
 
 # testing:
 # read data
@@ -68,7 +68,7 @@ data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axi
 # get prediction of label
 vote_result = np.dot(data_feature, w.T)
 for i in range(len(vote_result)):
-    for j in range(26):
+    for j in range(num_of_classes):
         vote_result[i][j] = logistic_f(vote_result[i][j])
 data_label_prediction = (vote_result.argmax(axis=1)+1).reshape(len(vote_result),1)
 
@@ -78,12 +78,12 @@ prediction.to_csv('prediction.csv')
 # calculate performance: accuracy, precision, recall, and F1 score
 ACC = np.sum(data_label_prediction == data_label) / len(data_label)
 
-TP = np.zeros(26)
-FN = np.zeros(26)
-FP = np.zeros(26)
-TN = np.zeros(26)
+TP = np.zeros(num_of_classes)
+FN = np.zeros(num_of_classes)
+FP = np.zeros(num_of_classes)
+TN = np.zeros(num_of_classes)
 
-for i in range(26):
+for i in range(num_of_classes):
     for j in range(len(data_label)):
         if data_label[j][0] == i+1 :
             if data_label_prediction[j][0] == i+1:
