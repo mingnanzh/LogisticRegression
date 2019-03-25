@@ -42,7 +42,7 @@ num_of_features=17
 num_of_classes=26
 # training:
 # read data
-data_feature , data_label = init_data("train_set.csv")
+data_feature, data_label = init_data("dataset/train_set.csv")
 data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axis=1)
 
 # initialize w
@@ -62,7 +62,7 @@ for i in range(num_of_classes):
 
 # testing:
 # read data
-data_feature, data_label = init_data("test_set.csv")
+data_feature, data_label = init_data("dataset/test_set.csv")
 data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axis=1)
 
 # get prediction of label
@@ -73,7 +73,7 @@ for i in range(len(vote_result)):
 data_label_prediction = (vote_result.argmax(axis=1)+1).reshape(len(vote_result),1)
 
 prediction = pd.DataFrame(data_label_prediction)
-prediction.to_csv('prediction.csv')
+prediction.to_csv('dataset/prediction.csv')
 
 # calculate performance: accuracy, precision, recall, and F1 score
 ACC = np.sum(data_label_prediction == data_label) / len(data_label)
