@@ -4,8 +4,8 @@
    - Gradient Descent Method
    - OvR Strategy
 
-#### Performance on different parameter settings:
-   - `alpha=0.1, maxiteration=300`:
+### Performance on different parameter settings:
+- `alpha=0.1, maxiteration=300`:
       Performance Metric | Value (%)
       :-: | :-:
       $Accuracy$ | $68.35$
@@ -26,4 +26,13 @@
       $macro\ Precision$ | $70.26$
       $macro\ Recall$ | $70.32$
       $macro\ F_1$ | $70.29$
-      
+
+Performance Metric | Value (%)
+:-: | :-:
+$Accuracy$ | $68.35$
+$micro\ Precision$ | $68.35$
+$micro\ Recall$ | $68.35$
+$micro\  F_1$ | $68.35$
+$macro\ Precision$ | $70.20$
+$macro\ Recall$ | $68.47$
+$macro\ F_1$ | $69.32$
