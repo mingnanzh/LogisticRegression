@@ -24,10 +24,10 @@ def logistic_f(x):
         return np.exp(x) / (1 + np.exp(x))
 
 
-def logistic_regression(feature, label, alpha, MaxIterations, classifier):
+def logistic_regression(feature, label, alpha, max_iterations, classifier):
     m, n = feature.shape                                                  # m:number of instances n：number of features
     weights = np.zeros((n,1))                                             # initialization: (1,...,1)
-    for i in range(MaxIterations):                                        # iterate n=MaxIterations times
+    for i in range(max_iterations):                                        # iterate n=max_iterations times
         A = np.dot(feature, weights)                                      # compute w^{T}x
         for j in range(len(A)):
             A[j][0] = logistic_f(A[j][0])                                 # compute h(x)=1/(1+exp^{-w^{T}x})
