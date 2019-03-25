@@ -13,7 +13,7 @@
   </tr>
   <tr>
     <td>January</td>
-    <td>$100</td>
+    <td align="center">$100</td>
   </tr>
   <tr>
     <td>February</td>
