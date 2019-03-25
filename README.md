@@ -6,6 +6,16 @@
 
 ### Performance on different parameter settings:
 - `alpha=0.1, maxiteration=300`:
+<table border="1">
+    <tr>
+        <td>row 1, cell 1</td>
+        <td>row 1, cell 2</td>
+    </tr>
+    <tr>
+        <td>row 2, cell 1</td>
+        <td>row 2, cell 2</td>
+    </tr>
+</table>
 
 Performance Metric | Value (%)
 :-: | :-:
