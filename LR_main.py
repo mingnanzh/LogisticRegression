@@ -111,14 +111,3 @@ print(" micro F1: %.2f%%" % (100 * micro_f1))
 print(" macro Precision: %.2f%%" % (100 * macro_precision))
 print(" macro Recall: %.2f%%" % (100 * macro_recall))
 print(" macro F1: %.2f%%" % (100 * macro_f1))
-
-
-
-
-
-
-
-
-
-
-
