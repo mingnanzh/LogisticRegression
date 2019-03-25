@@ -6,6 +6,7 @@
 
 ### Performance on different parameter settings:
 - `alpha=0.1, maxiteration=300`:
+
 Performance Metric | Value (%)
 :-: | :-:
 Accuracy | 68.35
@@ -17,6 +18,7 @@ macro Recall | 68.47
 macro F_1 | 69.32
    
 - `alpha=0.085, maxiteration=1000`:
+
 Performance Metric | Value (%)
 :-: | :-:
 Accuracy | 70.23
