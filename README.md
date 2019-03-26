@@ -29,3 +29,14 @@ macro Precision | 70.26
 macro Recall | 70.32
 macro F1 | 70.29
 
+- `alpha=0.085, maxiteration=10000`:
+
+Performance Metric | Value (%)
+:-: | :-:
+Accuracy | 71.07
+micro Precision | 71.07
+micro Recall | 71.07
+micro F1 | 71.07
+macro Precision | 71.14
+macro Recall | 71.17
+macro F1 | 71.15
