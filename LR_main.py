@@ -57,7 +57,7 @@ for i in range(num_of_classes):
             else:
                 data_label_modified.append(0)
     data_label_modified = np.array(data_label_modified).reshape(len(data_label_modified), 1)
-    w[i] = logistic_regression(data_feature, data_label_modified, 0.085, 1000, i).reshape(1, num_of_features)
+    w[i] = logistic_regression(data_feature, data_label_modified, 0.085, 10000, i).reshape(1, num_of_features)
     print(w[i])
 
 # testing:
