@@ -6,14 +6,14 @@ import pandas as pd
 def init_data(filename):
     dataset = []
     csv_reader = csv.reader(open(filename))
-    csv_header = next(csv_reader)                                 # read header=(feature1,feature2,...,feature n,label)
+    csv_header = next(csv_reader)                                           # read header=(feature1,feature2,...,feature n,label)
     for row in csv_reader:
-        dataset.append(row)                                       # read data
-    dataset = [[float(x) for x in row] for row in dataset]        # change char to float
+        dataset.append(row)                                                 # read data
+    dataset = [[float(x) for x in row] for row in dataset]                  # change char to float
     dataset = np.array(dataset)
-    feature_num = len(csv_header)                                 # obtain feature_num=n+1(n features, 1 label)
-    feature = dataset[:,0:feature_num-1]                          # obtain data of n features
-    label = dataset[:,-1]                                         # obtain data of labels
+    feature_num = len(csv_header)                                           # obtain feature_num=n+1(n features, 1 label)
+    feature = dataset[:,0:feature_num-1]                                    # obtain data of n features
+    label = dataset[:,-1]                                                   # obtain data of labels
     return feature, label.reshape(len(label), 1)
 
 
@@ -25,14 +25,14 @@ def logistic_f(x):
 
 
 def logistic_regression(feature, label, alpha, max_iterations, classifier):
-    m, n = feature.shape                                                  # m:number of instances n：number of features
-    weights = np.zeros((n,1))                                             # initialization: (1,...,1)
-    for i in range(max_iterations):                                       # iterate n=max_iterations times
-        A = np.dot(feature, weights)                                      # compute w^{T}x
+    m, n = feature.shape                                                    # m:number of instances n：number of features
+    weights = np.zeros((n,1))                                               # initialization: (1,...,1)
+    for i in range(max_iterations):                                         # iterate n=max_iterations times
+        A = np.dot(feature, weights)                                        # compute w^{T}x
         for j in range(len(A)):
-            A[j][0] = logistic_f(A[j][0])                                 # compute h(x)=1/(1+exp^{-w^{T}x})
-        E = A-label                                                       # compute E=h(x)-y
-        weights = weights - alpha * np.dot(feature.T,E) / m               # update w=w-alpha*x^{T}*E
+            A[j][0] = logistic_f(A[j][0])                                   # compute h(x)=1/(1+exp^{-w^{T}x})
+        E = A-label                                                         # compute E=h(x)-y
+        weights = weights - alpha * np.dot(feature.T,E) / m                 # update w=w-alpha*x^{T}*E
         error = np.sum(np.abs(E))
         print("Classifier[%d] iteration %d: error %f, percentage %.2f%%" % (classifier, i, error, 100*error/m))
     return weights
