@@ -1,6 +1,5 @@
 import csv
 import numpy as np
-import pandas as pd
 
 
 def init_data(filename):
@@ -17,20 +16,21 @@ def init_data(filename):
     return feature, label.reshape(len(label), 1)
 
 
-def logistic_f(x):
+def sigmoid(x):
     if x >= 0:
         return 1.0 / (1 + np.exp(-x))
     else:
         return np.exp(x) / (1 + np.exp(x))
 
 
+# LR algorithm
 def logistic_regression(feature, label, alpha, max_iterations, classifier):
     m, n = feature.shape                                                    # m:number of instances n：number of features
     weights = np.zeros((n,1))                                               # initialization: (1,...,1)
     for i in range(max_iterations):                                         # iterate n=max_iterations times
         A = np.dot(feature, weights)                                        # compute w^{T}x
         for j in range(len(A)):
-            A[j][0] = logistic_f(A[j][0])                                   # compute h(x)=1/(1+exp^{-w^{T}x})
+            A[j][0] = sigmoid(A[j][0])                                   # compute h(x)=1/(1+exp^{-w^{T}x})
         E = A-label                                                         # compute E=h(x)-y
         weights = weights - alpha * np.dot(feature.T,E) / m                 # update w=w-alpha*x^{T}*E
         error = np.sum(np.abs(E))
@@ -48,7 +48,7 @@ data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axi
 # initialize w
 w = np.zeros(num_of_features*num_of_classes).reshape(num_of_classes,num_of_features)
 
-# create 26 classifiers
+# One-vs-Rest (OvR) strategy: create 26 classifiers
 for i in range(num_of_classes):
     data_label_modified = []
     for j in range(len(data_label)):
@@ -58,6 +58,7 @@ for i in range(num_of_classes):
                 data_label_modified.append(0)
     data_label_modified = np.array(data_label_modified).reshape(len(data_label_modified), 1)
     w[i] = logistic_regression(data_feature, data_label_modified, 0.085, 10000, i).reshape(1, num_of_features)
+    print("Classifier[%d]:" % (i))
     print(w[i])
 
 # testing:
@@ -69,11 +70,8 @@ data_feature = np.insert(data_feature, 0, values=np.ones(len(data_feature)), axi
 vote_result = np.dot(data_feature, w.T)
 for i in range(len(vote_result)):
     for j in range(num_of_classes):
-        vote_result[i][j] = logistic_f(vote_result[i][j])
+        vote_result[i][j] = sigmoid(vote_result[i][j])
 data_label_prediction = (vote_result.argmax(axis=1)+1).reshape(len(vote_result),1)
-
-prediction = pd.DataFrame(data_label_prediction)
-prediction.to_csv('result/prediction.csv')
 
 # calculate performance: accuracy, precision, recall, and F1 score
 ACC = np.sum(data_label_prediction == data_label) / len(data_label)
