@@ -32,7 +32,7 @@ def logistic_regression(feature, label, alpha, max_iterations, classifier):
         for j in range(len(A)):
             A[j][0] = sigmoid(A[j][0])                                   # compute h(x)=1/(1+exp^{-w^{T}x})
         E = A-label                                                         # compute E=h(x)-y
-        weights = weights - alpha * np.dot(feature.T,E) / m                 # update w=w-alpha*x^{T}*E
+        weights = weights - alpha * np.dot(feature.T,E) / m                 # update w=w-alpha*x^{T}*E/m
         error = np.sum(np.abs(E))
         print("Classifier[%d] iteration %d: error %f, percentage %.2f%%" % (classifier, i, error, 100*error/m))
     return weights
